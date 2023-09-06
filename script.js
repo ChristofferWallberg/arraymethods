@@ -59,12 +59,15 @@ function updateDOM(providedata = data) {
 
     // add CSS class to div
     element.classList.add("person");
+    element.setAttribute('id', `${person.name}`)
     element.innerHTML = `<strong>${person.name}</strong> ${formatMoney(
       person.money
     )}`;
 
     main.appendChild(element);
   });
+  console.log("data " + data);
+
 }
 
 // funktion för att formatera nummer som pengar
@@ -74,8 +77,28 @@ function formatMoney(number) {
 }
 
 // function for double the money
+function doubleMoney() {
+  data.forEach((i) => {
+    i.money = i.money * 2;
+  });
+  updateDOM();
+}
+
 
 // function for showing only millionaires
+// funkar ej helt...
+function showMillionaires() {
+  const millionaire = data;
+  console.log(millionaire.values);
+  millionaire.forEach((i) => {
+    if (i.money < 1000000) {
+      millionaire.splice(i, 1);
+    }
+  });
+  console.log(millionaire.values);
+  data = millionaire;
+  updateDOM();
+}
 
 // function for sorting richest persons
 
@@ -83,3 +106,5 @@ function formatMoney(number) {
 
 // add new user, event listener
 addUserBtn.addEventListener("click", getRandomUser);
+doubleBtn.addEventListener("click", doubleMoney);
+showMilliBtn.addEventListener("click", showMillionaires);
