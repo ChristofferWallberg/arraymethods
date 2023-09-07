@@ -86,17 +86,8 @@ function doubleMoney() {
 
 
 // function for showing only millionaires
-// funkar ej helt...
 function showMillionaires() {
-  const millionaire = data;
-  console.log(millionaire.values);
-  millionaire.forEach((i) => {
-    if (i.money < 1000000) {
-      millionaire.splice(i, 1);
-    }
-  });
-  console.log(millionaire.values);
-  data = millionaire;
+  data = data.filter((i) => i.money >= 1000000);
   updateDOM();
 }
 
